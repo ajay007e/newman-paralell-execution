@@ -4,8 +4,9 @@ import * as util from './lib/util.js'
 
 const main = async () => {
     util.initializeFileSetups();
-    const result = await util.executePrompt();
-    !result?.status ? console.error(`Prompt execution failed`) : console.log(result?.response)
+    const resultFromPrompt = await util.executePrompt();
+    const resultFromSetup = !resultFromPrompt?.status ? console.error(`Prompt execution failed`) : await util.configureSetups(resultFromPrompt?.response);
+    !resultFromSetup?.status ? console.error(`Configuring setup failed`) : console.log(resultFromSetup);
 }
 
 main()
