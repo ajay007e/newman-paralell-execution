@@ -72,6 +72,8 @@ class TearCollection:
                 # Write the contents of the partitioned collectiono to the new collection
                 with open(file_path, 'w') as file:
                     file.write(json_string)
+
+                return collection_name, (len(diff_points) - 1)
         except:
             print("Sorry! Something went wrong")
             

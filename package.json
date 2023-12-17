@@ -11,6 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "enquirer": "^2.4.1"
+    "chalk": "^5.3.0",
+    "cli-table3": "^0.6.3",
+    "enquirer": "^2.4.1",
+    "multi-progress-bars": "^5.0.3",
+    "newman": "^6.0.0"
   }
 }
