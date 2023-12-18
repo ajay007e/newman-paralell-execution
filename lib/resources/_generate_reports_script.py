@@ -54,19 +54,15 @@ class GenerateReports:
             number_of_collections = int(number_of_collections)
 
             # Declaring variables and lists for appropriate attributes related to collections
-            req_list = []       # List to store request attributes                                                  ??
             primary_req_list_sum = 0    # Sum of request attributes
             secondary_req_list_sum = 0   # Another variable for request attributes
 
-            pre_req = []        # List to store pre-request script attributes                                       ??
             primary_pre_req_digit = 0   # Sum of pre-request script attributes
             secondary_pre_req_digit = 0  # Another variable for pre-request script attributes
 
-            test_scripts = []       # List to store test script attributes                                          ??
             primary_test_scripts_digit = 0  # Sum of test script attributes
             secondary_test_scripts_digit = 0  # Another variable for test script attributes
 
-            asser = []        # List to store assertion attributes                                                  ??
             primary_asser_digit = 0   # Sum of assertion attributes
             secondary_asser_digit = 0  # Another variable for assertion attributes
 
@@ -75,9 +71,8 @@ class GenerateReports:
             counter_variable = 1
             combined_contents = ""
 
-
             # Using for loop to get input file as a html from local system
-            for i in range(1,number_of_collections+1):
+            for i in range(1, number_of_collections + 1):
 
                 html_template = {
                     "path" : "",
@@ -90,13 +85,13 @@ class GenerateReports:
                 # Open the file in read mode ('r')
                 with open(generated_html_file_path , 'r') as file:
                     # Read the entire contents of the file
-                    file_contents = file.read()
+                    generated_html_file_contents = file.read()
 
                 # Creating empty list to store my html elemnts to list elements
-                htmlFileToList=[]
+                htmlFileToList = []
 
                 # Using the for loop split my html code line by line
-                for line in file_contents.split("\n"):
+                for line in generated_html_file_contents.split("\n"):
                         htmlFileToList.append(line)
 
                 timeStamp = [htmlFileToList[30], htmlFileToList[42]]
@@ -119,15 +114,15 @@ class GenerateReports:
                 average_seconds = average_time % 60
                 total_run_duration_in_str = f"{average_minutes}m {average_seconds:.2f}s"
 
-                total_run_duration_list = ['6m 13.9s', '6m 32.8s', '9m 38.3s', '10m', '6m 36.2s', '9m 28.6s', '5m 43.4s', '9m 8.2s', '10m 36.6s', '11m 53.4s', '6m 5.2s', '9m 29.7s', '57.8s', '2m 54.1s', '6m 57.6s', '4m 53.2s', '4m 40s', '2m 45.6s', '5m 6.6s', '5m 7.5s', '7m 11.2s', '3m 2.6s', '41s', '5m 19.3s', '7m 27.4s', '7m 34.3s']
+                # total_run_duration_list = ['6m 13.9s', '6m 32.8s', '9m 38.3s', '10m', '6m 36.2s', '9m 28.6s', '5m 43.4s', '9m 8.2s', '10m 36.6s', '11m 53.4s', '6m 5.2s', '9m 29.7s', '57.8s', '2m 54.1s', '6m 57.6s', '4m 53.2s', '4m 40s', '2m 45.6s', '5m 6.6s', '5m 7.5s', '7m 11.2s', '3m 2.6s', '41s', '5m 19.3s', '7m 27.4s', '7m 34.3s']
 
                 max_duration_in_seconds = self.__find_max_time_duration(total_run_duration_list)
                 max_time_from_all_groups = (f"{int(max_duration_in_seconds // 60)}m {max_duration_in_seconds % 60:.1f}s")
-                max_with_int_plus_by_one = int(max_time_from_all_groups.split('m')[0])+1.5
+                max_with_int_plus_by_one = int(max_time_from_all_groups.split('m')[0]) + 1.5
 
 
-                divtag_of_time_in_str = list(f'        <div class="col-md-3">Time</div><div class="col-md-9">{time_in_str}</div>')
-                divtag_of_total_run_in_str = list('        <div class="col-md-6">Total run duration</div><div class="col-md-6">{total_run_duration_in_str}/div>')
+                div_tag_of_time_in_str = list(f'        <div class="col-md-3">Time</div><div class="col-md-9">{time_in_str}</div>')
+                div_tag_of_total_run_in_str = list('        <div class="col-md-6">Total run duration</div><div class="col-md-6">{total_run_duration_in_str}/div>')
 
 
                 # Searching our useful table from entire html code and finding the start and end position of our table
