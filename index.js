@@ -2,13 +2,17 @@
 import * as util from './lib/util.js'
 
 
+const exitFails = (message) => {
+    throw message;
+}
+
 const main = async () => {
     util.initializeFileSetups();
     const resultFromPrompt = await util.executePrompt();
-    const resultFromSetup = !resultFromPrompt?.status ? console.error(`Prompt execution failed`) : await util.configureSetups(resultFromPrompt?.response);
-    const resultFromTest = !resultFromSetup?.status ? console.error(`Configuring setup failed`) : await util.executeTests(resultFromSetup?.data);
-    !resultFromTest.status ? console.error(`Test execution failed`) : console.log(resultFromTest)
-
+    const resultFromSetup = !resultFromPrompt?.status ? exitFails(`Prompt execution failed`) : await util.configureSetups(resultFromPrompt?.response);
+    const resultFromTest = !resultFromSetup?.status ? exitFails(`Configuring setup failed`) : await util.executeTests(resultFromSetup?.data);
+    const resultFromGenerateReport = !resultFromTest?.status ? exitFails(`Test execution failed`) : await util.generateReport(resultFromTest);
+    !resultFromGenerateReport?.status ? exitFails(`Report Generation failed`) : util.showGenerateReports();
 }
 
 main()

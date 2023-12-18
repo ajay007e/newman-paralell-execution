@@ -3,7 +3,7 @@ import os
 import sys
 
 
-# Overall, this code is designed to execute the process of running multiple Newman Tests
+# Overall, this code is designed to execute the process of running multiple Newman Tests 
 #       with different JSON files and environment settings. This code will create multiple
 #       collections from a collection according to the input pattern.
 
@@ -73,9 +73,9 @@ class TearCollection:
                 with open(file_path, 'w') as file:
                     file.write(json_string)
 
-                return collection_name, (len(diff_points) - 1)
+                print([collection_name, len(diff_points) - 1])
         except:
-            print("Sorry! Something went wrong")
+            raise Exception("Sorry! Something went wrong")
             
 tear_collection_object = TearCollection()
 
