@@ -8,8 +8,8 @@ const exitFails = (message) => {
 
 const main = async () => {
     try {
-        await util.initializeFileSetups();
-        const resultFromPrompt = await util.executePrompt();
+        const resultFromFileSetups = await util.initializeFileSetups();
+        const resultFromPrompt = !resultFromFileSetups?.status ? exitFails('Initilization failed') : await util.executePrompt(resultFromFileSetups?.isPatternAvailableInEnv);
         const resultFromSetup = !resultFromPrompt?.status ? exitFails(`Prompt execution failed`) : await util.configureSetups(resultFromPrompt?.response);
         !resultFromSetup?.status ? exitFails(`Configuring setup failed`) : await util.executeTests(resultFromSetup?.data);
     } catch (err){
